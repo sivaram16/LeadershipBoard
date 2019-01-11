@@ -4,10 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.example.leadershipboard.MainActivity
 import com.example.leadershipboard.R
 
-class Splash : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
     private val mHandler = Handler()
 
 
@@ -18,7 +17,7 @@ class Splash : AppCompatActivity() {
     }
 
     private fun intentFunction() {
-        val intentToMainactivity = Intent(this, SignIn::class.java)
+        val intentToMainactivity = Intent(this, SignInActivity::class.java)
         startActivity(intentToMainactivity)
         //Valar Morgulis
     }

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:background="#00A878"
         android:layout_height="match_parent"
-        tools:context=".Activity.Splash">
+        tools:context=".Activity.SplashActivity">
 
     <ImageView
             android:src="@drawable/ic_feather_pen"
@@ -25,7 +25,7 @@
 
 
     <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:text="CS Entry"
             android:textColor="#fff"
             android:textSize="36dp"
@@ -36,9 +36,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.455"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.228"/>
+            app:layout_constraintVertical_bias="0.271" android:textAlignment="center" android:fontFamily="@font/lato"/>
 
 
 

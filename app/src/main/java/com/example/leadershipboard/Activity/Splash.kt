@@ -20,5 +20,6 @@ class Splash : AppCompatActivity() {
     private fun intentFunction() {
         val intentToMainactivity = Intent(this, SignIn::class.java)
         startActivity(intentToMainactivity)
+        //Valar Morgulis
     }
 }

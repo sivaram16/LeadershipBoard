@@ -7,7 +7,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Activity.SignInActivity">
+        tools:context=".Activity.SignInActivity"
+        android:paddingBottom="20dp">
 
     <ImageView
             android:layout_width="105dp"
@@ -35,6 +36,7 @@
             android:fontFamily="@font/montserrat"/>
 
     <com.google.android.material.textfield.TextInputLayout
+
         android:id="@+id/usernameTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="58dp"
@@ -80,6 +82,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
+            style="@style/PrimaryButton"
         android:text="SIGN IN"
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="16dp"

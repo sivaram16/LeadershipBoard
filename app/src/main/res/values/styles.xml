@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SecondaryButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="rippleColor">@color/lightGrey</item>
+    </style>
+
 </resources>

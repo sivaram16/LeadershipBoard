@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".Activity.MainActivity"></activity>
         <activity android:name=".Activity.AboutActivity"></activity>
+        <activity android:name=".Activity.HelpActivity"></activity>
     </application>
 
 </manifest>

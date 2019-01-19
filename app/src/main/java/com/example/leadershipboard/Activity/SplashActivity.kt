@@ -8,17 +8,25 @@ import com.example.leadershipboard.R
 
 class SplashActivity : AppCompatActivity() {
     private val mHandler = Handler()
-
-
+    private var uid: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        mHandler.postDelayed({ intentFunction() }, 2000)
+        val pref = applicationContext.getSharedPreferences("MyPref", 0) // 0 - for private mode
+        uid = pref.getString("UID", null) // getting String
+        mHandler.postDelayed({
+            intentFunction()
+        }, 2000)
     }
 
     private fun intentFunction() {
-        val intentToMainactivity = Intent(this, SignInActivity::class.java)
-        startActivity(intentToMainactivity)
+        if (uid != null) {
+            val intent = Intent(this@SplashActivity, DashboardActivity::class.java)
+            startActivity(intent)
+        } else {
+            val intent = Intent(this@SplashActivity, SignInActivity::class.java)
+            startActivity(intent)
+        }
         //SayMyName
     }
 }

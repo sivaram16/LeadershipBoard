@@ -16,6 +16,7 @@ import com.example.leadershipboard.R
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class SignInActivity : AppCompatActivity() {
+    private var userid: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +61,12 @@ class SignInActivity : AppCompatActivity() {
             }
             override fun onResponse(response: Response<LoginMutation.Data>) {
                 Log.e("Response", response.data().toString())
+                userid = response.data()!!.login().id()
                 runOnUiThread {
+                    val pref = applicationContext.getSharedPreferences("MyPref", 0) // 0 - for private mode
+                    val editor = pref.edit()
+                    editor.putString("UID", userid) // Storing string
+                    editor.commit() // commit changes
                     if (response.data()?.login()?.errors() == null) {
                         handleLoginSuccess()
                     } else {

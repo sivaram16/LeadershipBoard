@@ -18,6 +18,9 @@ class DashboardActivity : AppCompatActivity() {
         aboutButton.setOnClickListener {
             startActivity(Intent(this@DashboardActivity, AboutActivity::class.java))
         }
+        materialButton.setOnClickListener {
+            startActivity(Intent(this@DashboardActivity, HelpActivity::class.java))
+        }
     }
 
 }

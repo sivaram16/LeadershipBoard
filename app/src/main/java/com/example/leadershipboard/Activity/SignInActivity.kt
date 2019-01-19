@@ -47,6 +47,7 @@ class SignInActivity : AppCompatActivity() {
     private fun handleLoginSuccess() {
         runOnUiThread {
             startActivity(Intent(this@SignInActivity, DashboardActivity::class.java))
+            finish()
         }
     }
 

@@ -15,11 +15,19 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun setOnClickListeners() {
+
+        ViewRecord.setOnClickListener{
+            startActivity(Intent(this@DashboardActivity, ViewRecordActivity::class.java))
+        }
+
         aboutButton.setOnClickListener {
             startActivity(Intent(this@DashboardActivity, AboutActivity::class.java))
         }
         materialButton.setOnClickListener {
             startActivity(Intent(this@DashboardActivity, HelpActivity::class.java))
+        }
+        addNewEntry.setOnClickListener {
+            startActivity(Intent(this@DashboardActivity, NewEntryActivity::class.java))
         }
     }
 

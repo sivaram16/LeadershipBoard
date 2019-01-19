@@ -141,8 +141,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:textColor="@color/darkGrey"
-        android:backgroundTint="@color/colorPrimary"
+        style="@style/SecondaryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

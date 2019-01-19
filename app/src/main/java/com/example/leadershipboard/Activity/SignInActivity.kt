@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.Toast
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
@@ -25,21 +26,56 @@ class SignInActivity : AppCompatActivity() {
     private fun setOnClickListeners(){
         signin.setOnClickListener{
             Log.e("Clicked","haha")
+            usernameTextInputLayout.error = null
+            passwordInputLayout.error = null
             postLoginRequest()
         }
     }
+    private fun handleWhenPasswordIncorrect() {
+        passwordInputLayout.error = "Password is incorrect"
+        passwordEditText.text = null
+        passwordEditText.requestFocus()
+    }
+
+    private fun handleWhenInvalidAccount() {
+        usernameTextInputLayout.error = "Username does not exist"
+        passwordEditText.text = null
+        usernameEditText.text = null
+        usernameTextInputLayout.requestFocus()
+    }
+
+    private fun handleLoginSuccess() {
+        runOnUiThread {
+            startActivity(Intent(this@SignInActivity, DashboardActivity::class.java))
+            finish()
+        }
+    }
+
     private fun postLoginRequest() {
         Apollo_Helper.getApolloClient().mutate(LoginMutation.builder().username(usernameEditText.text.toString().trim())
             .password(passwordEditText.text.toString().trim()).build()).enqueue(object : ApolloCall.Callback<LoginMutation.Data>() {
             override fun onFailure(e: ApolloException) {
-                Log.e("Failure",""+e)
+                Log.e("Failure", e.toString())
 
             }
             override fun onResponse(response: Response<LoginMutation.Data>) {
-                Log.e("Response",""+response.data())
-                startActivity(Intent(this@SignInActivity, DashboardActivity::class.java))
+                Log.e("Response", response.data().toString())
+                runOnUiThread {
+                    if (response.data()?.login()?.errors() == null) {
+                        handleLoginSuccess()
+                    } else {
+                        val receivedError = response.data()?.login()?.errors()?.get(0)?.errorCode().toString()
+                        when(receivedError) {
+                            Constants.PASSWORD_INVALID_ERROR_CODE -> {
+                                handleWhenPasswordIncorrect()
+                            }
+                            Constants.USERNAME_INVALID_ERROR_CODE -> {
+                                handleWhenInvalidAccount()
+                            }
+                        }
+                    }
+                }
             }
-
         }
         )
     }

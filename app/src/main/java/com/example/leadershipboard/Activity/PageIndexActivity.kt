@@ -51,7 +51,7 @@ class PageIndexActivity : AppCompatActivity() {
             super.onBackPressed()
             return
         }
-        Toast.makeText(this, "You cannot go back now", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Click cancel to go back now", Toast.LENGTH_LONG).show()
     }
 
     private fun setOnClickListener() {
@@ -71,6 +71,7 @@ class PageIndexActivity : AppCompatActivity() {
         }
         pageIndex_cancel.setOnClickListener{
             startActivity(Intent(this@PageIndexActivity, DashboardActivity::class.java))
+            finish()
         }
     }
 }

@@ -39,6 +39,7 @@ class NewEntryActivity : AppCompatActivity() {
                 intent.putExtra("current", num)
                 intent.putExtra("currentValue", constant)
                 startActivity(intent)
+                finish()
             }catch (e: NumberFormatException){
                 total_students_editText.error = "Enter an Integer"
             }

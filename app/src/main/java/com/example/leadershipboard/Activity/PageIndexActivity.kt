@@ -4,15 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.leadershipboard.R
 import kotlinx.android.synthetic.main.activity_page_index.*
 import java.lang.NumberFormatException
 
+
+
 class PageIndexActivity : AppCompatActivity() {
 
     var number: Int? = 0
     var current: Int? = 0
+
+    var disabledBackButton = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +44,14 @@ class PageIndexActivity : AppCompatActivity() {
             }
         })
         setOnClickListener()
+    }
+
+    override fun onBackPressed() {
+        if(disabledBackButton) {
+            super.onBackPressed()
+            return
+        }
+        Toast.makeText(this, "You cannot go back now", Toast.LENGTH_LONG).show()
     }
 
     private fun setOnClickListener() {

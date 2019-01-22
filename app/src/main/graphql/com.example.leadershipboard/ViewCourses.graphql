@@ -1,0 +1,21 @@
+query ViewCourses{
+	viewCourses{
+    id
+    coursename
+    regulation
+    coursecode
+    students {
+      id
+      name
+      registerno
+      dob
+      year
+      section
+    }
+    faculty{
+      id
+      username
+      name
+    }
+  }
+}

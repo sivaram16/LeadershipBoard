@@ -13,13 +13,10 @@ class DashboardActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dashboard)
         setOnClickListeners()
     }
-
     private fun setOnClickListeners() {
-
         ViewRecord.setOnClickListener{
             startActivity(Intent(this@DashboardActivity, ViewRecordActivity::class.java))
         }
-
         aboutButton.setOnClickListener {
             startActivity(Intent(this@DashboardActivity, AboutActivity::class.java))
         }
@@ -30,5 +27,4 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this@DashboardActivity, NewEntryActivity::class.java))
         }
     }
-
 }

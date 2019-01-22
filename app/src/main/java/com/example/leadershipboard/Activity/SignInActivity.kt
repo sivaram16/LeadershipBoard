@@ -57,7 +57,6 @@ class SignInActivity : AppCompatActivity() {
             .password(passwordEditText.text.toString().trim()).build()).enqueue(object : ApolloCall.Callback<LoginMutation.Data>() {
             override fun onFailure(e: ApolloException) {
                 Log.e("Failure", e.toString())
-
             }
             override fun onResponse(response: Response<LoginMutation.Data>) {
                 Log.e("Response", response.data().toString())

@@ -4,9 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.apollographql.apollo.ApolloCall
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.exception.ApolloException
 import com.example.leadershipboard.R
+import com.example.leadershipboard.ViewCoursesQuery
 import kotlinx.android.synthetic.main.activity_page_index.*
 import java.lang.NumberFormatException
 
@@ -44,6 +49,7 @@ class PageIndexActivity : AppCompatActivity() {
             }
         })
         setOnClickListener()
+        fetchingthestudentDetails()
     }
 
     override fun onBackPressed() {
@@ -73,5 +79,22 @@ class PageIndexActivity : AppCompatActivity() {
             startActivity(Intent(this@PageIndexActivity, DashboardActivity::class.java))
             finish()
         }
+    }
+    fun fetchingthestudentDetails() {
+        Apollo_Helper.getApolloClient().query(
+            ViewCoursesQuery.builder()
+                .build()).enqueue(object : ApolloCall.Callback<ViewCoursesQuery.Data>() {
+            override fun onFailure(e: ApolloException) {
+
+            }
+
+            override fun onResponse(response: Response<ViewCoursesQuery.Data>) {
+                for(items in response.data()?.viewCourses()!!)run {
+
+
+
+                }
+            }
+        })
     }
 }

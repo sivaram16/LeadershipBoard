@@ -1,5 +1,5 @@
-mutation Login($username:String!,$password:String!){
-login(username:$username,password:$password){
+mutation FacultyLogin($username:String!,$password:String!){
+facultyLogin(username:$username,password:$password){
   id
   username
   name

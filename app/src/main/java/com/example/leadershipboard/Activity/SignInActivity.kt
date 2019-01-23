@@ -11,7 +11,7 @@ import android.widget.Toast
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
-import com.example.leadershipboard.LoginMutation
+import com.example.leadershipboard.FacultyLoginMutation
 import com.example.leadershipboard.R
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
@@ -53,23 +53,23 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun postLoginRequest() {
-        Apollo_Helper.getApolloClient().mutate(LoginMutation.builder().username(usernameEditText.text.toString().trim())
-            .password(passwordEditText.text.toString().trim()).build()).enqueue(object : ApolloCall.Callback<LoginMutation.Data>() {
+        Apollo_Helper.getApolloClient().mutate(FacultyLoginMutation.builder().username(usernameEditText.text.toString().trim())
+            .password(passwordEditText.text.toString().trim()).build()).enqueue(object : ApolloCall.Callback<FacultyLoginMutation.Data>() {
             override fun onFailure(e: ApolloException) {
                 Log.e("Failure", e.toString())
             }
-            override fun onResponse(response: Response<LoginMutation.Data>) {
+            override fun onResponse(response: Response<FacultyLoginMutation.Data>) {
                 Log.e("Response", response.data().toString())
-                userid = response.data()!!.login().id()
+                userid = response.data()!!.facultyLogin().id()
                 runOnUiThread {
                     val pref = applicationContext.getSharedPreferences("MyPref", 0) // 0 - for private mode
                     val editor = pref.edit()
                     editor.putString("UID", userid) // Storing string
                     editor.commit() // commit changes
-                    if (response.data()?.login()?.errors() == null) {
+                    if (response.data()?.facultyLogin()?.errors() == null) {
                         handleLoginSuccess()
                     } else {
-                        val receivedError = response.data()?.login()?.errors()?.get(0)?.errorCode().toString()
+                        val receivedError = response.data()?.facultyLogin()?.errors()?.get(0)?.errorCode().toString()
                         when(receivedError) {
                             Constants.PASSWORD_INVALID_ERROR_CODE -> {
                                 handleWhenPasswordIncorrect()

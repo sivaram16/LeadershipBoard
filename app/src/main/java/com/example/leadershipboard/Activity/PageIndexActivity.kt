@@ -91,8 +91,6 @@ class PageIndexActivity : AppCompatActivity() {
             override fun onResponse(response: Response<ViewCoursesQuery.Data>) {
                 for(items in response.data()?.viewCourses()!!)run {
 
-
-
                 }
             }
         })

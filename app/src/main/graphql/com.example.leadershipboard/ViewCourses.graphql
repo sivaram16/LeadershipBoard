@@ -1,5 +1,5 @@
-query ViewCourses{
-	viewCourses{
+query ViewCourses($facultyId : String){
+	viewCourses(facultyId : $facultyId){
     id
     coursename
     regulation

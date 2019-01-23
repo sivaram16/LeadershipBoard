@@ -56,7 +56,7 @@ class NewEntryActivity : AppCompatActivity() {
         }
     }
     fun fetchingtheCourseDetails() {
-        Apollo_Helper.getApolloClient().query(ViewCoursesQuery.builder()
+        Apollo_Helper.getApolloClient().query(ViewCoursesQuery.builder().facultyId(uid)
             .build()).enqueue(object : ApolloCall.Callback<ViewCoursesQuery.Data>() {
             override fun onFailure(e: ApolloException) {
 
@@ -64,17 +64,10 @@ class NewEntryActivity : AppCompatActivity() {
 
             override fun onResponse(response: Response<ViewCoursesQuery.Data>) {
                 for(items in response.data()?.viewCourses()!!)run {
-                    //Log.e("Regulations",""+items.coursename())
-                    if (uid.equals(items.faculty().id())) {
-                        courseArray.add(items)
-                    }
+                    Log.e("Courses",""+items.coursename())
+                    Log.e("Studemts",""+items.students())
                 }
-
-                Log.e("regulation",""+regulationArray)
-                Log.e("coursename",""+courseArray)
-                Log.e("UID",""+uid)
             }
         })
     }
-
 }

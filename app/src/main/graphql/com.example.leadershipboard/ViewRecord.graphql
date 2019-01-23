@@ -1,0 +1,25 @@
+query ViewRecords {
+  viewRecords{
+    student{
+      id
+      registerno
+      name
+      dob
+      year
+      section
+    }
+    faculty{
+        id
+        username
+        name
+      }
+    course {
+      coursecode
+      id
+      coursename
+      regulation
+    }
+    points
+    date
+  }
+}

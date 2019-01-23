@@ -1,0 +1,10 @@
+mutation addRecord($courseId:String!,$facultyId:String!,$studentId:String!,$points:Int!,$date:String!){
+addRecord(courseId:$courseId,facultyId:$facultyId,studentId:$studentId,points:$points,date:$date){
+  id
+  errors {
+   path
+   errorCode
+   message
+ }
+}
+}

@@ -1,36 +1,26 @@
 package com.example.leadershipboard.Activity
 
+import DataStore
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
-import android.provider.SyncStateContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.apollographql.apollo.ApolloCall
-import com.apollographql.apollo.api.Response
-import com.apollographql.apollo.exception.ApolloException
 import com.example.leadershipboard.R
 import com.example.leadershipboard.ViewCoursesQuery
-import kotlinx.android.synthetic.main.activity_new_entry.*
 import kotlinx.android.synthetic.main.activity_page_index.*
-import java.lang.NumberFormatException
-
 
 
 class PageIndexActivity : AppCompatActivity() {
 
     var number: Int? = 0
     var current: Int? = 0
-    var courseName: String? = ""
     var studentList: List<ViewCoursesQuery.Student> = ArrayList<ViewCoursesQuery.Student>()
-    var studentRegisterNumber: MutableList<String> = mutableListOf<String>()
     var selectedStudentArray: MutableList<String> = mutableListOf()
     lateinit var studentRegisterAdapter: ArrayAdapter<String>
     var disabledBackButton = false
@@ -119,25 +109,5 @@ class PageIndexActivity : AppCompatActivity() {
             finish()
         }
     }
-    /*fun fetchingthestudentDetails() {
-        Apollo_Helper.getApolloClient().query(
-            ViewCoursesQuery.builder()
-                .build()).enqueue(object : ApolloCall.Callback<ViewCoursesQuery.Data>() {
-            override fun onFailure(e: ApolloException) {
 
-            }
-
-            override fun onResponse(response: Response<ViewCoursesQuery.Data>) {
-                for(items in response.data()?.viewCourses()!!)run {
-
-                    runOnUiThread {
-                        if (courseName.equals(items.coursename())) {
-                            studentRegisterNumber.add(items)
-                        }
-                        studentRegisterAdapter.notifyDataSetChanged()
-                    }
-                }
-            }
-        })
-    }*/
 }

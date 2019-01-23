@@ -103,6 +103,7 @@
                     android:visibility="gone" />
 
                 <RelativeLayout
+                    android:id="@+id/getting_Course"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 

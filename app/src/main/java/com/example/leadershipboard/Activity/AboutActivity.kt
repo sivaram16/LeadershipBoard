@@ -1,5 +1,6 @@
 package com.example.leadershipboard.Activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.leadershipboard.R
@@ -15,6 +16,7 @@ class AboutActivity : AppCompatActivity() {
     }
     private fun setOnClickListener() {
         cross.setOnClickListener {
+            startActivity(Intent(this@AboutActivity, DashboardActivity::class.java))
             finish()
         }
     }

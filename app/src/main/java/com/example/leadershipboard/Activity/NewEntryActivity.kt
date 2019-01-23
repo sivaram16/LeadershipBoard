@@ -20,8 +20,8 @@ import kotlinx.android.synthetic.main.activity_new_entry.*
 class NewEntryActivity : AppCompatActivity() {
     var constant = 1
     var selectedRegulation:Int = 0
-    var selectedCourse: String = ""
     var selectedCourseName: String =""
+    var selectedCourseId: String = ""
     var courseNameArray: MutableList<String> = mutableListOf()
     var regulationArray: MutableList<Int> = mutableListOf<Int>()
     var studentList:List<ViewCoursesQuery.Student>?= ArrayList<ViewCoursesQuery.Student>()
@@ -55,24 +55,16 @@ class NewEntryActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                getting_Course.visibility = View.GONE
-                course_spinner.visibility = View.VISIBLE
                 selectedRegulation = Integer.parseInt(regulation_spinner.selectedItem.toString())
                 Log.i("Selected Regulation", selectedRegulation.toString())
                 fetchingtheCourseDetails()
-                //Log.e("other regulation", regulation_spinner.selectedItem.toString())
             }
         }
-
         for(i in 2015..2020)
         regulationArray.add(i)
-        // Create an ArrayAdapter using a simple spinner layout and languages array
         regulationSpinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, regulationArray)
-        // Set layout to use when the list of choices appear
         regulationSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        // Set Adapter to Spinner
         regulation_spinner!!.adapter = regulationSpinnerAdapter
-
         course_spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedCourseName = course_spinner.selectedItem.toString()
@@ -96,8 +88,8 @@ class NewEntryActivity : AppCompatActivity() {
                 val intent = Intent(this@NewEntryActivity, PageIndexActivity::class.java)
                 intent.putExtra("current", num)
                 intent.putExtra("currentValue", constant)
-                //intent.putExtra("course", studentList)
                 intent.putExtra("courseName", selectedCourseName)
+                intent.putExtra("courseId", selectedCourseId)
                 startActivity(intent)
                 finish()
             }catch (e: NumberFormatException){
@@ -114,22 +106,14 @@ class NewEntryActivity : AppCompatActivity() {
 
             override fun onResponse(response: Response<ViewCoursesQuery.Data>) {
                 for(items in response.data()?.viewCourses()!!)run {
-                    //Log.e("Courses",""+items)
-                    //Log.e("Studemts",""+items.students())
-                    //Log.e("regulation",items.regulation().toString())
                     courseNameArray.clear()
                     runOnUiThread {
-                        //regulationArray.add(items.regulation())
-                        //regulationSpinnerAdapter.notifyDataSetChanged()
                         if(selectedRegulation == items.regulation()){
-                            //Log.e("checking Regulation", selectedRegulation.toString())
-                            //Log.e("original Regulation", items.regulation().toString())
                             if(selectedCourseName == items.coursename()) {
                                 studentList = items.students()
                                 studentList?.let { DataStore.setStudentListFromExternal(it) }
+                                selectedCourseId = items.id()
                             }
-                            /*Log.e("selectedCourse", selectedCourseName)
-                            Log.e("coursename",items.coursename())*/
                             courseNameArray.add(items.coursename())
                         }
                         courseNameAdapter.notifyDataSetChanged()

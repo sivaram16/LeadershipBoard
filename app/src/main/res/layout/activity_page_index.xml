@@ -61,7 +61,7 @@
 
             <Spinner android:layout_width="152dp"
                      android:layout_height="47dp"
-                     android:id="@+id/spinner"
+                     android:id="@+id/registerspinner"
                      app:layout_constraintStart_toStartOf="parent"
                      app:layout_constraintTop_toBottomOf="@+id/textView3"
                      android:layout_marginTop="24dp"
@@ -78,7 +78,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner"/>
+                    app:layout_constraintTop_toBottomOf="@+id/registerspinner"/>
 
             <EditText
                     android:id="@+id/student_marks"

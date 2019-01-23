@@ -20,8 +20,11 @@ import kotlinx.android.synthetic.main.activity_new_entry.*
 class NewEntryActivity : AppCompatActivity() {
     var constant = 1
     var selectedRegulation:Int = 0
+    var selectedCourse: String = ""
+    var selectedCourseName: String =""
+    var courseNameArray: MutableList<String> = mutableListOf()
     var regulationArray: MutableList<Int> = mutableListOf<Int>()
-    var courseArray: MutableList<String> = mutableListOf<String>()
+    var studentList:List<ViewCoursesQuery.Student>?= ArrayList<ViewCoursesQuery.Student>()
     lateinit var regulationSpinnerAdapter: ArrayAdapter<Int>
     lateinit var courseNameAdapter: ArrayAdapter<String>
     private var uid: String? = null
@@ -61,7 +64,7 @@ class NewEntryActivity : AppCompatActivity() {
             }
         }
 
-        for(i in 2015..2025)
+        for(i in 2015..2020)
         regulationArray.add(i)
         // Create an ArrayAdapter using a simple spinner layout and languages array
         regulationSpinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, regulationArray)
@@ -72,7 +75,8 @@ class NewEntryActivity : AppCompatActivity() {
 
         course_spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
+                selectedCourseName = course_spinner.selectedItem.toString()
+                fetchingtheCourseDetails()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -81,7 +85,7 @@ class NewEntryActivity : AppCompatActivity() {
 
         }
 
-        courseNameAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, courseArray)
+        courseNameAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, courseNameArray)
         courseNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         course_spinner!!.adapter = courseNameAdapter
     }
@@ -92,6 +96,8 @@ class NewEntryActivity : AppCompatActivity() {
                 val intent = Intent(this@NewEntryActivity, PageIndexActivity::class.java)
                 intent.putExtra("current", num)
                 intent.putExtra("currentValue", constant)
+                //intent.putExtra("course", studentList)
+                intent.putExtra("courseName", selectedCourseName)
                 startActivity(intent)
                 finish()
             }catch (e: NumberFormatException){
@@ -111,14 +117,20 @@ class NewEntryActivity : AppCompatActivity() {
                     //Log.e("Courses",""+items)
                     //Log.e("Studemts",""+items.students())
                     //Log.e("regulation",items.regulation().toString())
-                    courseArray.clear()
+                    courseNameArray.clear()
                     runOnUiThread {
                         //regulationArray.add(items.regulation())
                         //regulationSpinnerAdapter.notifyDataSetChanged()
                         if(selectedRegulation == items.regulation()){
-                            Log.e("checking Regulation", selectedRegulation.toString())
-                            Log.e("original Regulation", items.regulation().toString())
-                            courseArray.add(items.coursename())
+                            //Log.e("checking Regulation", selectedRegulation.toString())
+                            //Log.e("original Regulation", items.regulation().toString())
+                            if(selectedCourseName == items.coursename()) {
+                                studentList = items.students()
+                                studentList?.let { DataStore.setStudentListFromExternal(it) }
+                            }
+                            /*Log.e("selectedCourse", selectedCourseName)
+                            Log.e("coursename",items.coursename())*/
+                            courseNameArray.add(items.coursename())
                         }
                         courseNameAdapter.notifyDataSetChanged()
                     }

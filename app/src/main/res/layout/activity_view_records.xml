@@ -87,7 +87,7 @@
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="View by Date"
+                            android:text="Download Today's Records "
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:textColor="@color/colorAccent"/>
@@ -95,7 +95,7 @@
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="View all records for a date"
+                            android:text="Download a copy as Excel CSV"
                             android:textSize="14sp"
                             android:textColor="@android:color/black"/>
 

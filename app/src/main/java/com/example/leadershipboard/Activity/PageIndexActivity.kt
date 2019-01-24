@@ -42,7 +42,7 @@ class PageIndexActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_page_index)
         pageIndex_next.isEnabled = false
-        var formatter: SimpleDateFormat  = SimpleDateFormat("YYYY-MM-DD")
+        var formatter: SimpleDateFormat  = SimpleDateFormat("yyyy-MM-DD")
         currentDate = formatter.format(Date())
         Log.i("DATE STRING", currentDate)
         val pref = applicationContext.getSharedPreferences("MyPref", 0) // 0 - for private mode

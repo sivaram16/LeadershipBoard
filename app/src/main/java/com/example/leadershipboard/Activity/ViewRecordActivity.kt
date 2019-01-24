@@ -1,8 +1,10 @@
 package com.example.leadershipboard.Activity
 
+import android.app.DownloadManager
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -11,38 +13,34 @@ import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
 import com.example.leadershipboard.ViewRecordsQuery
 import kotlinx.android.synthetic.main.activity_view_records.*
-import java.io.BufferedReader
-import java.io.FileWriter
-import java.lang.Exception
-import java.nio.file.Files
-import java.nio.file.Paths
-import androidx.core.content.ContextCompat.getSystemService
-import android.app.DownloadManager
-import android.os.Environment
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ViewRecordActivity : AppCompatActivity() {
     var csvString :String?=""
-    var fileReader: BufferedReader? = null
-    var fileWriter: FileWriter? = null
-
+    private var uid: String? = null
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.leadershipboard.R.layout.activity_view_records)
+        val pref = applicationContext.getSharedPreferences("MyPref", 0) // 0 - for private mode
+        uid = pref.getString("UID", null) // getting String
         setOnClickListener()
     }
     @RequiresApi(Build.VERSION_CODES.O)
     fun setOnClickListener() {
         downloadRecords.setOnClickListener{
             fetchingAllRecords()
-            convertToCSV()
+        }
+        viewDate.setOnClickListener {
+            fetchingDateRecords()
         }
     }
     fun fetchingAllRecords(){
-        Apollo_Helper.getApolloClient().query(ViewRecordsQuery.builder().csv(true).build())
+        Apollo_Helper.getApolloClient().query(ViewRecordsQuery.builder().csv(true).facultyId(uid).build())
             .enqueue(object : ApolloCall.Callback<ViewRecordsQuery.Data>() {
                 override fun onFailure(e: ApolloException) {
 
@@ -50,6 +48,7 @@ class ViewRecordActivity : AppCompatActivity() {
 
                 override fun onResponse(response: Response<ViewRecordsQuery.Data>) {
                     csvString=response.data()?.viewRecords()?.csv()
+                    convertToCSV()
                     Log.e("csvString",""+csvString)
                 }
 
@@ -79,11 +78,23 @@ try {
         file.length(),
         true
     )
-    val a = getFilesDir()
-    Log.e("file",a.absolutePath)
 }
 catch (e:Exception){
     Log.e("WriteFile",e.toString())
 }
+    }
+    fun fetchingDateRecords() {
+        var formatter: SimpleDateFormat = SimpleDateFormat("YYYY-MM-DD")
+        Apollo_Helper.getApolloClient().query(ViewRecordsQuery.builder()
+            .date(formatter.format(Date())).facultyId(uid).build()).enqueue(object : ApolloCall.Callback<ViewRecordsQuery.Data>() {
+            override fun onFailure(e: ApolloException) {
+
+            }
+
+            override fun onResponse(response: Response<ViewRecordsQuery.Data>) {
+                convertToCSV()
+            }
+
+        })
     }
 }

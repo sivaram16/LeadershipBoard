@@ -1,5 +1,5 @@
-query ViewRecords($csv : Boolean) {
-  viewRecords(csv :$csv){
+query ViewRecords($csv : Boolean,$date: String,$facultyId : String,$coursename :String) {
+  viewRecords(csv :$csv,date:$date,coursename:$coursename,facultyId:$facultyId){
   csv
   records {
     student{

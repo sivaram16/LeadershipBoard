@@ -33,7 +33,6 @@ class PageIndexActivity : AppCompatActivity() {
     var selectedStudentRegisterNo: String? = null
     var currentDate: String?=null
     private var selectedStudentId: String? = null
-    var tempSelectedRegisterNo: MutableList<String> = ArrayList<String>()
     var studentList: List<ViewCoursesQuery.Student> = ArrayList<ViewCoursesQuery.Student>()
     var selectedStudentArray: MutableList<String> = mutableListOf()
     lateinit var studentRegisterAdapter: ArrayAdapter<String>

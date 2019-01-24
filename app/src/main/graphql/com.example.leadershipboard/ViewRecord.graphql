@@ -1,5 +1,7 @@
-query ViewRecords {
-  viewRecords{
+query ViewRecords($csv : Boolean) {
+  viewRecords(csv :$csv){
+  csv
+  records {
     student{
       id
       registerno
@@ -21,5 +23,6 @@ query ViewRecords {
     }
     points
     date
+  }
   }
 }

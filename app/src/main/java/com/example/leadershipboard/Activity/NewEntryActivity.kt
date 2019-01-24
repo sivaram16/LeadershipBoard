@@ -15,6 +15,7 @@ import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
 import com.example.leadershipboard.R
 import com.example.leadershipboard.ViewCoursesQuery
+import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.activity_new_entry.*
 import java.io.File
 import java.io.FileOutputStream
@@ -87,17 +88,24 @@ class NewEntryActivity : AppCompatActivity() {
     }
     private fun setOnClickListeners() {
         continue_button.setOnClickListener{
-            try {
-                val num = Integer.parseInt(total_students_editText.text.toString())
-                val intent = Intent(this@NewEntryActivity, PageIndexActivity::class.java)
-                intent.putExtra("current", num)
-                intent.putExtra("currentValue", constant)
-                intent.putExtra("courseName", selectedCourseName)
-                intent.putExtra("courseId", selectedCourseId)
-                startActivity(intent)
-                finish()
-            }catch (e: NumberFormatException){
-                total_students_editText.error = "Enter an Integer"
+            Log.i("checking studentList", Integer.parseInt(studentList?.count().toString()).toString())
+            Log.i("checking edittext", Integer.parseInt(total_students_editText.text.toString()).toString())
+            if (Integer.parseInt(studentList?.count().toString())<Integer.parseInt(total_students_editText.text.toString())){
+                total_students_editText.error = "You cannot have more than "+studentList?.count().toString()+" students"
+            }
+            else {
+                try {
+                    val num = Integer.parseInt(total_students_editText.text.toString())
+                    val intent = Intent(this@NewEntryActivity, PageIndexActivity::class.java)
+                    intent.putExtra("current", num)
+                    intent.putExtra("currentValue", constant)
+                    intent.putExtra("courseName", selectedCourseName)
+                    intent.putExtra("courseId", selectedCourseId)
+                    startActivity(intent)
+                    finish()
+                } catch (e: NumberFormatException) {
+                    total_students_editText.error = "you cannot have strings"
+                }
             }
         }
     }

@@ -20,8 +20,7 @@ import com.example.leadershipboard.ViewCoursesQuery
 import kotlinx.android.synthetic.main.activity_page_index.*
 import java.text.SimpleDateFormat
 import java.util.*
-
-
+import kotlin.collections.ArrayList
 
 
 class PageIndexActivity : AppCompatActivity() {
@@ -34,6 +33,7 @@ class PageIndexActivity : AppCompatActivity() {
     var selectedStudentRegisterNo: String? = null
     var currentDate: String?=null
     private var selectedStudentId: String? = null
+    var tempSelectedRegisterNo: MutableList<String> = ArrayList<String>()
     var studentList: List<ViewCoursesQuery.Student> = ArrayList<ViewCoursesQuery.Student>()
     var selectedStudentArray: MutableList<String> = mutableListOf()
     lateinit var studentRegisterAdapter: ArrayAdapter<String>
@@ -79,7 +79,6 @@ class PageIndexActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedStudentRegisterNo = registerspinner?.selectedItem.toString()
                 selectedStudentId = getIdForRegisterNumber(selectedStudentRegisterNo!!)
-
             }
         }
         studentRegisterAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, selectedStudentArray)
@@ -89,11 +88,13 @@ class PageIndexActivity : AppCompatActivity() {
     }
 
     fun getStudentsList(){
+        Log.i("Alreadylist",DataStore.tempBucket.toString())
         for (student in studentList){
-            Log.i("REGISTER NUMBER", student.registerno())
-            selectedStudentArray.add(student.registerno())
-            studentRegisterAdapter.notifyDataSetChanged()
-
+            if(!DataStore.isRegisterNoAlreadyUsed(student.registerno())) {
+                Log.i("REGISTER NUMBER", student.registerno())
+                selectedStudentArray.add(student.registerno())
+                studentRegisterAdapter.notifyDataSetChanged()
+            }
         }
     }
 
@@ -121,6 +122,7 @@ class PageIndexActivity : AppCompatActivity() {
                 val num = Integer.parseInt(student_marks.text.toString())
                 if (current!!.toInt() < number!!.toInt()) {
                     val intent = Intent(this@PageIndexActivity, PageIndexActivity::class.java)
+                    DataStore.tempBucket.add(selectedStudentRegisterNo.toString())
                     intent.putExtra("current", number!!)
                     intent.putExtra("currentValue", current!! + 1)
                     intent.putExtra("courseId", courseId)

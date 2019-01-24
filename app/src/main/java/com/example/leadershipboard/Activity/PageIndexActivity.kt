@@ -22,17 +22,17 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
+
+
 class PageIndexActivity : AppCompatActivity() {
 
     var number: Int? = 0
     var current: Int? = 0
     private var uid: String? = null
     private var courseId: String? = null
-    private var studentId: String? = null
     private var studentPoints: Int? = 0
-    val gettingdate: Date?= Date()
+    var selectedStudentRegisterNo: String? = null
     var currentDate: String?=null
-    val format = SimpleDateFormat("DD/MM/YYYY")
     private var selectedStudentId: String? = null
     var studentList: List<ViewCoursesQuery.Student> = ArrayList<ViewCoursesQuery.Student>()
     var selectedStudentArray: MutableList<String> = mutableListOf()
@@ -43,8 +43,9 @@ class PageIndexActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_page_index)
         pageIndex_next.isEnabled = false
-        //currentDate=gettingdate.format(format)
-        studentPoints = Integer.parseInt(student_marks.text.toString())
+        var formatter: SimpleDateFormat  = SimpleDateFormat("YYYY-MM-DD")
+        currentDate = formatter.format(Date())
+        Log.i("DATE STRING", currentDate)
         val pref = applicationContext.getSharedPreferences("MyPref", 0) // 0 - for private mode
         uid = pref.getString("UID", null) // getting String
         number = intent?.getIntExtra("current", 0)
@@ -76,7 +77,9 @@ class PageIndexActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedStudentId = registerspinner?.selectedItem.toString()
+                selectedStudentRegisterNo = registerspinner?.selectedItem.toString()
+                selectedStudentId = getIdForRegisterNumber(selectedStudentRegisterNo!!)
+
             }
         }
         studentRegisterAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, selectedStudentArray)
@@ -90,10 +93,18 @@ class PageIndexActivity : AppCompatActivity() {
             Log.i("REGISTER NUMBER", student.registerno())
             selectedStudentArray.add(student.registerno())
             studentRegisterAdapter.notifyDataSetChanged()
-            if(selectedStudentId == student.id()){
-                studentId = student.id()
+
+        }
+    }
+
+    fun getIdForRegisterNumber(registerNo:String) :String {
+        for(student in studentList) {
+            if (student.registerno().toString().equals(registerNo)) {
+                return student.id().toString()
             }
         }
+        return null.toString()
+
     }
 
     override fun onBackPressed() {
@@ -112,11 +123,14 @@ class PageIndexActivity : AppCompatActivity() {
                     val intent = Intent(this@PageIndexActivity, PageIndexActivity::class.java)
                     intent.putExtra("current", number!!)
                     intent.putExtra("currentValue", current!! + 1)
+                    intent.putExtra("courseId", courseId)
                     startActivity(intent)
+                    mutateDataToServer()
                     finish()
                 }
                 else if(current!!.toInt().equals(number!!.toInt())) {
-                   // mutateDataToServer()
+                    mutateDataToServer()
+                    startActivity(Intent(this@PageIndexActivity,DashboardActivity::class.java))
                 }
             } catch (e: NumberFormatException){
                 student_marks.error = "Marks cannot be strings"
@@ -127,19 +141,35 @@ class PageIndexActivity : AppCompatActivity() {
             finish()
         }
     }
-   /* fun mutateDataToServer() {
+    fun mutateDataToServer() {
+        studentPoints = Integer.parseInt(student_marks.text.toString())
         Apollo_Helper.getApolloClient().mutate(AddRecordMutation.builder().courseId(courseId.toString()).facultyId(uid.toString())
-            .studentId(studentId.toString()).points()
-            .date().build()).enqueue(object : ApolloCall.Callback<AddRecordMutation.Data>(){
+            .studentId(selectedStudentId.toString()).points(studentPoints!!.toInt())
+            .date(currentDate.toString()).build()).enqueue(object : ApolloCall.Callback<AddRecordMutation.Data>(){
             override fun onFailure(e: ApolloException) {
+                Log.e("jhjh",""+e.toString())
+                Toast.makeText(this@PageIndexActivity,""+e.toString(),Toast.LENGTH_SHORT).show()
 
             }
 
             override fun onResponse(response: Response<AddRecordMutation.Data>) {
-
+                Log.e("jhjh",""+response.data()?.addRecord()?.errors().toString())
+                Log.e("jhjh",""+response.data()?.addRecord()?.id().toString())
+                Log.e("courseid",""+courseId)
+                Log.e("studentid",""+selectedStudentId)
+                Log.e("points",""+studentPoints)
+                Log.e("staffId",""+uid)
+                Log.e("date",""+currentDate)
+                runOnUiThread {
+                    Toast.makeText(
+                        this@PageIndexActivity,
+                        "Error" + response.data()?.addRecord()?.errors().toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
 
         })
-    }*/
+    }
 
 }

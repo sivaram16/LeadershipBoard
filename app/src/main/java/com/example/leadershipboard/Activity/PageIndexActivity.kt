@@ -163,7 +163,7 @@ class PageIndexActivity : AppCompatActivity() {
                 runOnUiThread {
                     Toast.makeText(
                         this@PageIndexActivity,
-                        "Error" + response.data()?.addRecord()?.errors().toString(),
+                        "Successfully Added",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

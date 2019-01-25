@@ -136,22 +136,3 @@ class NewEntryActivity : AppCompatActivity() {
     }
 }
 
-/*fun convertToCSV() {
-    try {
-        val file = File(Environment.getExternalStorageDirectory().toString() + File.separator +"Download"+ File.separator+ "details.csv")
-        Log.e("dir",file.toString())
-        file.createNewFile()
-//write the bytes in file
-        if (file.exists()) {
-            val fo = FileOutputStream(file)
-            fo.write(csvString?.toByteArray())
-            fo.close()
-            println("file created: $file")
-        }
-
-
-    }
-    catch (e: Exception){
-        Log.e("WriteFile",e.toString())
-    }
-}*/

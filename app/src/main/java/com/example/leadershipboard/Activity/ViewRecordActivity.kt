@@ -41,9 +41,11 @@ class ViewRecordActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun setOnClickListener() {
         downloadRecords.setOnClickListener{
+            Toast.makeText(this@ViewRecordActivity,"Downloaded",Toast.LENGTH_SHORT).show()
             fetchingAllRecords()
         }
         viewDate.setOnClickListener {
+            Toast.makeText(this@ViewRecordActivity,"Downloaded",Toast.LENGTH_SHORT).show()
             fetchingDateRecords()
         }
     }
@@ -56,17 +58,18 @@ class ViewRecordActivity : AppCompatActivity() {
 
                 override fun onResponse(response: Response<ViewRecordsQuery.Data>) {
                     var csvString :String?=""
+                    var AllRecordCSVName:String ="allRecordLeadershipRecord"
                     csvString=response.data()?.viewRecords()?.csv()
                     Log.e("csvString",""+csvString)
-                    convertToCSV(csvString.toString())
+                    convertToCSV(csvString.toString(),AllRecordCSVName)
                     Log.e("csvString",""+csvString)
                 }
 
             })
     }
-    fun convertToCSV(responseString : String) {
-try {
-    val file = File(Environment.getExternalStorageDirectory().toString() + File.separator +"Download"+ File.separator+ "details.csv")
+    fun convertToCSV(responseString : String,storeString : String) {
+        try {
+    val file = File(Environment.getExternalStorageDirectory().toString() + File.separator +"Download"+ File.separator+ storeString)
     Log.e("dir",file.toString())
     file.createNewFile()
 //write the bytes in file
@@ -102,16 +105,16 @@ catch (e:Exception){
 
             override fun onResponse(response: Response<ViewRecordsQuery.Data>) {
                 var dateString :String?=""
+                var DateCSVName:String ="LeadershipRecord"+formatter.format(Date())
                 Log.e("date",""+formatter.format(Date()))
                 Log.e("responce",""+response.data()?.viewRecords().toString())
                 dateString=response.data()?.viewRecords()?.csv()
-                convertToCSV(dateString.toString())
+                convertToCSV(dateString.toString(),DateCSVName)
             }
 
         })
     }
     private fun askPermission() {
-
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
             || ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
@@ -120,7 +123,6 @@ catch (e:Exception){
         } else {
         }
     }
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 100) {

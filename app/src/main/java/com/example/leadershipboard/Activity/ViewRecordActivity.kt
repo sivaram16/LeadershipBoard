@@ -32,7 +32,7 @@ class ViewRecordActivity : AppCompatActivity() {
         setContentView(com.example.leadershipboard.R.layout.activity_view_records)
         val pref = applicationContext.getSharedPreferences("MyPref", 0) // 0 - for private mode
         uid = pref.getString("UID", null) // getting String
-        if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= 23) {
+        if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= 21) {
             askPermission()
         } else {
         }

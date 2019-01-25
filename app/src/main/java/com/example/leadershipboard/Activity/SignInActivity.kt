@@ -60,10 +60,10 @@ class SignInActivity : AppCompatActivity() {
                 Log.e("Failure", e.toString())
             }
             override fun onResponse(response: Response<FacultyLoginMutation.Data>) {
-                progressBar.visibility=View.INVISIBLE
                 Log.e("Response", response.data().toString())
                 userid = response.data()!!.facultyLogin().id()
                 runOnUiThread {
+                    progressBar.visibility=View.INVISIBLE
                     val pref = applicationContext.getSharedPreferences("MyPref", 0) // 0 - for private mode
                     val editor = pref.edit()
                     editor.putString("UID", userid) // Storing string

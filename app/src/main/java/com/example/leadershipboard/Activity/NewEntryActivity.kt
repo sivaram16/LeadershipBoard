@@ -74,6 +74,7 @@ class NewEntryActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedCourseName = course_spinner.selectedItem.toString()
                 fetchingtheCourseDetails()
+                Log.i("dropDownSelected",courseNameArray.toString())
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -117,18 +118,23 @@ class NewEntryActivity : AppCompatActivity() {
             }
 
             override fun onResponse(response: Response<ViewCoursesQuery.Data>) {
-                for(items in response.data()?.viewCourses()!!)run {
+                runOnUiThread {
                     courseNameArray.clear()
-                    runOnUiThread {
-                        if(selectedRegulation == items.regulation()){
-                            if(selectedCourseName == items.coursename()) {
-                                studentList = items.students()
-                                studentList?.let { DataStore.setStudentListFromExternal(it) }
-                                selectedCourseId = items.id()
+                    courseNameAdapter.notifyDataSetChanged()
+                    for (items in response.data()?.viewCourses()!!) run {
+                        runOnUiThread {
+                            if (selectedRegulation == items.regulation()) {
+                                if (selectedCourseName == items.coursename()) {
+                                    studentList = items.students()
+                                    studentList?.let { DataStore.setStudentListFromExternal(it) }
+                                    selectedCourseId = items.id()
+                                }
+                                courseNameArray.add(items.coursename())
+                                courseNameAdapter.notifyDataSetChanged()
+
                             }
-                            courseNameArray.add(items.coursename())
+                            courseNameAdapter.notifyDataSetChanged()
                         }
-                        courseNameAdapter.notifyDataSetChanged()
                     }
                 }
             }

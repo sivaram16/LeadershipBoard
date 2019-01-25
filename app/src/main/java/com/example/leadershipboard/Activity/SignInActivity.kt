@@ -4,6 +4,7 @@ import Constants
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.apollographql.apollo.ApolloCall
@@ -12,6 +13,7 @@ import com.apollographql.apollo.exception.ApolloException
 import com.example.leadershipboard.FacultyLoginMutation
 import com.example.leadershipboard.R
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import kotlin.math.sign
 
 class SignInActivity : AppCompatActivity() {
     private var userid: String? = null
@@ -25,6 +27,7 @@ class SignInActivity : AppCompatActivity() {
     private fun setOnClickListeners(){
         signin.setOnClickListener{
             Log.e("Clicked","haha")
+            progressBar.visibility=View.VISIBLE
             usernameTextInputLayout.error = null
             passwordInputLayout.error = null
             postLoginRequest()
@@ -57,6 +60,7 @@ class SignInActivity : AppCompatActivity() {
                 Log.e("Failure", e.toString())
             }
             override fun onResponse(response: Response<FacultyLoginMutation.Data>) {
+                progressBar.visibility=View.INVISIBLE
                 Log.e("Response", response.data().toString())
                 userid = response.data()!!.facultyLogin().id()
                 runOnUiThread {

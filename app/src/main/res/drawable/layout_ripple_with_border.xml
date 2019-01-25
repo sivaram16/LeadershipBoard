@@ -9,6 +9,10 @@
 
             <corners
                     android:radius="5dp"/>
+
+            <stroke
+                    android:width="0.5dp"
+                    android:color="@color/lightGrey" />
         </shape>
     </item>
 </ripple>

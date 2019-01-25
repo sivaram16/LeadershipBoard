@@ -35,6 +35,8 @@ class ViewRecordActivity : AppCompatActivity() {
         if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= 23) {
             askPermission()
         } else {
+            Log.i("Checking else","working fine")
+            askPermission()
         }
         setOnClickListener()
     }

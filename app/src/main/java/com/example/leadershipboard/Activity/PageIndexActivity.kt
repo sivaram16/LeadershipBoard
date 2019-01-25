@@ -1,7 +1,9 @@
 package com.example.leadershipboard.Activity
 
 import DataStore
+import android.app.AlertDialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -21,6 +23,8 @@ import kotlinx.android.synthetic.main.activity_page_index.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import android.content.DialogInterface
+import kotlinx.android.synthetic.main.dialog_layout.*
 
 
 class PageIndexActivity : AppCompatActivity() {
@@ -37,6 +41,7 @@ class PageIndexActivity : AppCompatActivity() {
     var selectedStudentArray: MutableList<String> = mutableListOf()
     lateinit var studentRegisterAdapter: ArrayAdapter<String>
     var disabledBackButton = false
+    lateinit var alertDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -138,10 +143,41 @@ class PageIndexActivity : AppCompatActivity() {
             }
         }
         pageIndex_cancel.setOnClickListener{
-            startActivity(Intent(this@PageIndexActivity, DashboardActivity::class.java))
-            finish()
+            openDialogOnCancel()
         }
     }
+
+    fun closeOnClick(view: View){
+        startActivity(Intent(this@PageIndexActivity, DashboardActivity::class.java))
+        finish()
+    }
+
+    fun openDialogOnCancel() {
+        var dialog = AlertDialog.Builder(this) // Context, this, etc.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog = AlertDialog.Builder(this, android.R.style.Theme_Material_Light_Dialog_Alert)
+        } else {
+            dialog = AlertDialog.Builder(this)
+        }
+        //dialog.setTitle("Previous records are already recorded. Clicking cancel will not change.")
+        val inflater = this.layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_layout, null)
+        dialog.setView(dialogView)
+        /*dialog.setPositiveButton("cancel") { arg0, arg1 ->
+            startActivity(Intent(this@PageIndexActivity, DashboardActivity::class.java))
+            finish()
+
+        }
+        dialog.setNegativeButton("stay") { arg0, arg1 ->
+
+        }*/
+        alertDialog = dialog.create()
+        alertDialog.show()
+    }
+    fun stayOnClick(view: View){
+        alertDialog.dismiss()
+    }
+
     fun mutateDataToServer() {
         studentPoints = Integer.parseInt(student_marks.text.toString())
         Apollo_Helper.getApolloClient().mutate(AddRecordMutation.builder().courseId(courseId.toString()).facultyId(uid.toString())

@@ -30,6 +30,7 @@ class DashboardActivity : AppCompatActivity() {
             editor?.commit()
             val intent = Intent(this@DashboardActivity, SignInActivity::class.java)
             startActivity(intent)
+            finish()
         }
         addNewEntry.setOnClickListener {
             startActivity(Intent(this@DashboardActivity, NewEntryActivity::class.java))

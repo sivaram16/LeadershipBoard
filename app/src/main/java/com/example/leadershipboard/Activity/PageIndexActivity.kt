@@ -137,6 +137,7 @@ class PageIndexActivity : AppCompatActivity() {
                 else if(current!!.toInt().equals(number!!.toInt())) {
                     mutateDataToServer()
                     startActivity(Intent(this@PageIndexActivity,DashboardActivity::class.java))
+                    finish()
                 }
             } catch (e: NumberFormatException){
                 student_marks.error = "Marks cannot be strings"

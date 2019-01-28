@@ -15,19 +15,19 @@ A mobile app based solution for faculty to enter college related data.
 - [Roshan G Rahman](https://www.github.com/roshanrahman) (Vue.js developer)
 - [Vineesh V](https://www.github.com/vineeshvk) (Backend/JavaScript developer)
 
-#### Tools and Technologies (for Android client)
+### Tools and Technologies (for Android client)
 - Written purely in Kotlin
 - Uses Apollo Client for GraphQL queries
 
-#### Features
+### Features
 - Straightforward Sign In for faculty
 - **Adding Mark Entries:** Staff can select their course and add marks for college related events for any number of students enrolled in that course.
 - **Easy download of data in CSV:** The data for all records or currently selected records can be instantly downloaded as a CSV file that can be opened and edited using any Spreadsheet software.
 
-#### Download
+### Download
 - You can download a sample APK [here](https://drive.google.com/open?id=161uw2XTEcpq-U7fF33_ke8jkZjbL4UaP)
 
-#### Screenshots
+### Screenshots
 <img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/sign.png" alt="Sign in" width="300">
 <img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/dashboard.png" alt="Sign in" width="300">
 <img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/new.png" alt="Sign in" width="300">

@@ -3,6 +3,10 @@
 ##### _A clean, straightforward platform for data entry_
 ###
 ***
+### Components
+- *Android client* (You're here)
+- [*Vue.js based web client*](https://github.com/roshanrahman/vue-leadership)
+- [*GraphQL/Postgres based TypeScript server*](https://github.com/vineeshvk/Leadership-Board-Backend)
 ### Android application
 A mobile app based solution for faculty to enter college related data.
 

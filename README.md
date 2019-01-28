@@ -2,7 +2,6 @@
 # ![Project Logo](https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/logo.png)
 ##### _A clean, straightforward platform for data entry_
 ###
-***
 ### Components
 - *Android client* (You're here)
 - [*Vue.js based web client*](https://github.com/roshanrahman/vue-leadership)

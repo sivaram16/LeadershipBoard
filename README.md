@@ -21,4 +21,9 @@ A mobile app based solution for faculty to enter college related data.
 - You can download a sample APK [here](https://drive.google.com/open?id=161uw2XTEcpq-U7fF33_ke8jkZjbL4UaP)
 
 #### Screenshots
-- Sign in: <img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/sign.png" alt="Sign in" width="400">
+<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/sign.png" alt="Sign in" width="300">
+<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/dashboard.png" alt="Sign in" width="300">
+<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/new.png" alt="Sign in" width="300">
+<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/mark.png" alt="Sign in" width="300">
+<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/view.png" alt="Sign in" width="300">
+<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/download.png" alt="Sign in" width="300">

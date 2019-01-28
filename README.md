@@ -8,6 +8,12 @@
 ### Android application
 A mobile app based solution for faculty to enter college related data.
 
+### Contributors
+- [Sivaram S](https://www.github.com/ThalapathySiva) (Android developer)
+- [Siva Perumal K](https://www.github.com/sivaperumal644) (Android developer)
+- [Roshan G Rahman](https://www.github.com/roshanrahman) (Android/Vue.js developer)
+- [Vineesh V](https://www.github.com/vineeshvk) (Backend/JavaScript developer)
+
 #### Tools and Technologies (for Android client)
 - Written purely in Kotlin
 - Uses Apollo Client for GraphQL queries

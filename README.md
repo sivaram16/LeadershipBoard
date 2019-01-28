@@ -1,6 +1,5 @@
 
 # ![Project Logo](https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/logo.png)
-# CS Entry
 ##### _A clean, straightforward platform for data entry_
 ###
 ***

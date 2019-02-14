@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">CS Entry</string>
 
-    <string name="cs_entry"><b>CS</b> Entry</string>
+    <string name="cs_entry">
+        <b>CS</b>
+        Entry
+    </string>
 </resources>

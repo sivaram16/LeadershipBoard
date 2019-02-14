@@ -2,6 +2,7 @@ package com.example.leadershipboard.Activity
 
 import android.app.DownloadManager
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -50,6 +51,9 @@ class ViewRecordActivity : AppCompatActivity() {
             Toast.makeText(this@ViewRecordActivity,"Downloaded",Toast.LENGTH_SHORT).show()
             fetchingDateRecords()
         }
+        viewStaroftheweek.setOnClickListener {
+            startActivity(Intent(this@ViewRecordActivity, GetDateDetails::class.java))
+        }
     }
     fun fetchingAllRecords(){
         Apollo_Helper.getApolloClient().query(ViewRecordsQuery.builder().csv(true).facultyId(uid).build())
@@ -74,7 +78,6 @@ class ViewRecordActivity : AppCompatActivity() {
     val file = File(Environment.getExternalStorageDirectory().toString() + File.separator +"Download"+ File.separator+ storeString)
     Log.e("dir",file.toString())
     file.createNewFile()
-//write the bytes in file
     if (file.exists()) {
         val fo = FileOutputStream(file)
         fo.write(responseString?.toByteArray())
@@ -135,4 +138,5 @@ catch (e:Exception){
                 Toast.makeText(this@ViewRecordActivity, "Permission Denied", Toast.LENGTH_SHORT).show()
             }
         }
+
 }

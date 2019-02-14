@@ -86,6 +86,7 @@ class NewEntryActivity : AppCompatActivity() {
         courseNameAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, courseNameArray)
         courseNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         course_spinner!!.adapter = courseNameAdapter
+
     }
     private fun setOnClickListeners() {
         continue_button.setOnClickListener{
@@ -131,7 +132,6 @@ class NewEntryActivity : AppCompatActivity() {
                                 }
                                 courseNameArray.add(items.coursename())
                                 courseNameAdapter.notifyDataSetChanged()
-
                             }
                             courseNameAdapter.notifyDataSetChanged()
                         }

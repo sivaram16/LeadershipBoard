@@ -1,0 +1,10 @@
+query CalculateStarOfWeek($startDate:String!,$endDate:String!,$regulation:Int!,$section:String!){
+  calculateStarOfWeek(startDate:$startDate,endDate:$endDate,regulation:$regulation,section:$section){
+    pdf
+    errors{
+      errorCode
+      message
+      path
+    }
+  }
+}

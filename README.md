@@ -23,6 +23,7 @@ A mobile app based solution for faculty to enter college related data.
 - Straightforward Sign In for faculty
 - **Adding Mark Entries:** Staff can select their course and add marks for college related events for any number of students enrolled in that course.
 - **Easy download of data in CSV:** The data for all records or currently selected records can be instantly downloaded as a CSV file that can be opened and edited using any Spreadsheet software.
+- **Easy download of data in PDF:** The Star of the Week can be instantly downloaded as a PDF file that can be opened and edited using any PDF software.
 
 ### Download
 - You can download a sample APK [here](https://drive.google.com/open?id=161uw2XTEcpq-U7fF33_ke8jkZjbL4UaP)
@@ -34,4 +35,8 @@ A mobile app based solution for faculty to enter college related data.
 <img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/mark.png" alt="Sign in" width="300">
 <img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/records.png" alt="Sign in" width="300">
 <img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/download.png" alt="Sign in" width="300">
+<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/pd.png" alt="Sign in" width="300">
+<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/sheet.png" alt="Sign in" width="300">
+
+
  

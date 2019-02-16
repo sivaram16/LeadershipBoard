@@ -101,7 +101,7 @@ catch (e:Exception){
 }
     }
     fun fetchingDateRecords() {
-        var formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-DD")
+        var formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
         Apollo_Helper.getApolloClient().query(ViewRecordsQuery.builder().csv(true)
             .date(formatter.format(Date())).facultyId(uid).build()).enqueue(object : ApolloCall.Callback<ViewRecordsQuery.Data>() {
             override fun onFailure(e: ApolloException) {

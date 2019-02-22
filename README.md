@@ -10,10 +10,10 @@
 A mobile app based solution for faculty to enter college related data.
 
 ### Contributors
+- [Vineesh V](https://www.github.com/vineeshvk) (Backend/JavaScript developer)
 - [Sivaram S](https://www.github.com/ThalapathySiva) (Android developer)
 - [Siva Perumal K](https://www.github.com/sivaperumal644) (Android developer)
 - [Roshan G Rahman](https://www.github.com/roshanrahman) (Vue.js developer)
-- [Vineesh V](https://www.github.com/vineeshvk) (Backend/JavaScript developer)
 
 ### Tools and Technologies (for Android client)
 - Written purely in Kotlin

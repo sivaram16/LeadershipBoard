@@ -16,7 +16,6 @@ class AboutActivity : AppCompatActivity() {
     }
     private fun setOnClickListener() {
         cross.setOnClickListener {
-            startActivity(Intent(this@AboutActivity, DashboardActivity::class.java))
             finish()
         }
     }

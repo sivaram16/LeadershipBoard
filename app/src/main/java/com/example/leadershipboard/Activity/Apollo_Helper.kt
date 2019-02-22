@@ -4,7 +4,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 object Apollo_Helper {
     private val BASE_URL = "https://leadership-board.herokuapp.com/graphql"
-    //apollo-codegen download-schema https://leadership-board.herokuapp.com/graphql --output schema.json
+   // apollo-codegen download-schema https://leadership-board.herokuapp.com/graphql --output schema.json
     private var apolloClient: com.apollographql.apollo.ApolloClient
     init {
         val loggingInterceptor = HttpLoggingInterceptor()

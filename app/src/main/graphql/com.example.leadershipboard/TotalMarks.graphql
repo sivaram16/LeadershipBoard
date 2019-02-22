@@ -1,0 +1,9 @@
+query getStudentTotalMarks($studentId : String){
+	getStudentTotalMarks(studentId : $studentId){
+    id
+    totalMarks{
+      totalMarks
+      id
+    }
+  }
+}

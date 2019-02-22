@@ -17,6 +17,7 @@ import kotlin.math.sign
 
 class SignInActivity : AppCompatActivity() {
     private var userid: String? = null
+    private var accountype:String?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,16 +61,23 @@ class SignInActivity : AppCompatActivity() {
                 Log.e("Failure", e.toString())
             }
             override fun onResponse(response: Response<FacultyLoginMutation.Data>) {
-                Log.e("Response", response.data().toString())
+                Log.e("Response", response.data()?.facultyLogin()?.accountType().toString())
                 userid = response.data()!!.facultyLogin().id()
+                accountype= response.data()!!.facultyLogin().accountType()
                 runOnUiThread {
                     progressBar.visibility=View.INVISIBLE
                     val pref = applicationContext.getSharedPreferences("MyPref", 0) // 0 - for private mode
                     val editor = pref.edit()
+                    editor.putString("accountType",accountype)
                     editor.putString("UID", userid) // Storing string
                     editor.commit() // commit changes
                     if (response.data()?.facultyLogin()?.errors() == null) {
-                        handleLoginSuccess()
+                        if (response.data()?.facultyLogin()?.accountType().toString().equals("faculty")) {
+                            handleLoginSuccess()
+                        }
+                        else{
+                            handlestudentActivity()
+                        }
                     } else {
                         val receivedError = response.data()?.facultyLogin()?.errors()?.get(0)?.errorCode().toString()
                         when(receivedError) {
@@ -85,5 +93,12 @@ class SignInActivity : AppCompatActivity() {
             }
         }
         )
+    }
+
+    fun handlestudentActivity() {
+        runOnUiThread {
+            startActivity(Intent(this@SignInActivity, Student::class.java))
+            finish()
+        }
     }
     }

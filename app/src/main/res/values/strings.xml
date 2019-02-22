@@ -5,4 +5,10 @@
         <b>CS</b>
         Entry
     </string>
+    
+    <string name="stringforabove350"> That’s a great score! Participate in more Leadership Board activities to earn more!</string>
+    <string name="stringforabove50"> It’s a good start! Participate in Leadership Board activities to earn more points and get rewarded! </string>
+    <string name="stringforabove500"> That’s a great score! Participate in more Leadership Board activities to earn more!</string>
+    <string name="stringfor0"> It’s time to get started. Participate in Leadership Board activities to earn points, and get exciting rewards!</string>
+
 </resources>

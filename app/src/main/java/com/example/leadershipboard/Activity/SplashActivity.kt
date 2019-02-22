@@ -16,11 +16,14 @@ import kotlinx.android.synthetic.main.activity_splash.*
 class SplashActivity : AppCompatActivity() {
     private val mHandler = Handler()
     private var uid: String? = null
+    private var accountType:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         val pref = applicationContext.getSharedPreferences("MyPref", 0) // 0 - for private mode
         uid = pref.getString("UID", null) // getting String
+        accountType=pref.getString("accountType", null)
+
         Apollo_Helper.getApolloClient().query(
             TestQuery.builder()
                 .build()).enqueue(object : ApolloCall.Callback<TestQuery.Data>(){
@@ -44,8 +47,15 @@ class SplashActivity : AppCompatActivity() {
 
     private fun intentFunction() {
         if (uid != null) {
-            val intent = Intent(this@SplashActivity, DashboardActivity::class.java)
-            startActivity(intent)
+            if (accountType.equals("faculty")){
+                val intent = Intent(this@SplashActivity, DashboardActivity::class.java)
+                startActivity(intent)
+            }
+            else{
+                val intent = Intent(this@SplashActivity, Student::class.java)
+                startActivity(intent)
+            }
+
         } else {
             val intent = Intent(this@SplashActivity, SignInActivity::class.java)
             startActivity(intent)

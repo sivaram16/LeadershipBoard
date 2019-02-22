@@ -14,6 +14,7 @@ import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
 import com.example.leadershipboard.R
+import com.example.leadershipboard.TestQuery
 import com.example.leadershipboard.ViewCoursesQuery
 import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.activity_new_entry.*
@@ -86,8 +87,7 @@ class NewEntryActivity : AppCompatActivity() {
         courseNameAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, courseNameArray)
         courseNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         course_spinner!!.adapter = courseNameAdapter
-
-    }
+        }
     private fun setOnClickListeners() {
         continue_button.setOnClickListener{
             Log.i("checking studentList", Integer.parseInt(studentList?.count().toString()).toString())
@@ -115,7 +115,6 @@ class NewEntryActivity : AppCompatActivity() {
         Apollo_Helper.getApolloClient().query(ViewCoursesQuery.builder().facultyId(uid)
             .build()).enqueue(object : ApolloCall.Callback<ViewCoursesQuery.Data>() {
             override fun onFailure(e: ApolloException) {
-
             }
 
             override fun onResponse(response: Response<ViewCoursesQuery.Data>) {
@@ -136,6 +135,7 @@ class NewEntryActivity : AppCompatActivity() {
                             courseNameAdapter.notifyDataSetChanged()
                         }
                     }
+                    progressbar.visibility=View.INVISIBLE
                 }
             }
         })

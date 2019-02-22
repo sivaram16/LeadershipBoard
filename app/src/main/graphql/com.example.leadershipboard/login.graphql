@@ -3,6 +3,7 @@ facultyLogin(username:$username,password:$password){
   id
   username
   name
+  accountType
   errors {
    path
    errorCode

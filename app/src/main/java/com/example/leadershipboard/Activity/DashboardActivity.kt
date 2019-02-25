@@ -2,8 +2,11 @@ package com.example.leadershipboard.Activity
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.leadershipboard.R
 import kotlinx.android.synthetic.main.activity_dashboard.*
 
@@ -19,6 +22,18 @@ class DashboardActivity : AppCompatActivity() {
         setOnClickListeners()
     }
     private fun setOnClickListeners() {
+        helpmanual.setOnClickListener {
+            val builder = AlertDialog.Builder(this@DashboardActivity)
+            builder.setMessage("Are you sure want to open the guidelines of the app ?")
+            builder.setPositiveButton("YES"){dialog, which ->
+                allowpdfDownload()
+            }
+            builder.setNegativeButton("No"){dialog,which ->
+                Toast.makeText(applicationContext,"cancelled", Toast.LENGTH_SHORT).show()
+            }
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+        }
         ViewRecord.setOnClickListener{
             startActivity(Intent(this@DashboardActivity, ViewRecordActivity::class.java))
         }
@@ -35,5 +50,11 @@ class DashboardActivity : AppCompatActivity() {
         addNewEntry.setOnClickListener {
             startActivity(Intent(this@DashboardActivity, NewEntryActivity::class.java))
         }
+    }
+
+    fun allowpdfDownload() {
+        val uri = Uri.parse("https://github.com/roshanrahman/vue-leadership/raw/master/github_assets/cs-entry-manual.pdf")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
     }
 }

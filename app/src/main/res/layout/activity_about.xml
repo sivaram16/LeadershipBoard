@@ -142,7 +142,7 @@
             android:id="@+id/version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Version 1.0"
+            android:text="Version 2.0"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:layout_marginTop="45dp"

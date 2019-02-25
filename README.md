@@ -3,17 +3,17 @@
 ##### _A clean, straightforward platform for data entry_
 ###
 ### Components
+- [*GraphQL/Postgres based TypeScript server*](https://github.com/vineeshvk/Leadership-Board-Backend)
 - *Android client* (You're here)
 - [*Vue.js based web client*](https://github.com/roshanrahman/vue-leadership)
-- [*GraphQL/Postgres based TypeScript server*](https://github.com/vineeshvk/Leadership-Board-Backend)
 ### Android application
 A mobile app based solution for faculty to enter college related data.
 
 ### Contributors
+- [Vineesh V](https://www.github.com/vineeshvk) (Backend/JavaScript developer)
 - [Sivaram S](https://www.github.com/ThalapathySiva) (Android developer)
 - [Siva Perumal K](https://www.github.com/sivaperumal644) (Android developer)
 - [Roshan G Rahman](https://www.github.com/roshanrahman) (Vue.js developer)
-- [Vineesh V](https://www.github.com/vineeshvk) (Backend/JavaScript developer)
 
 ### Tools and Technologies (for Android client)
 - Written purely in Kotlin

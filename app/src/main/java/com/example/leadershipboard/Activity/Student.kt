@@ -80,6 +80,9 @@ class Student : AppCompatActivity() {
                     name=response.data()?.studentTotalMarks?.get(0)?.name().toString()
                     progressBar2.visibility= View.INVISIBLE
                     textView7.text = totalmarks.toString()
+                    if(totalmarks == null) {
+                        textView7.text= 0.toString()
+                    }
                     if (totalmarks==0 || totalmarks==null){
                         textView9.text=resources.getString(com.example.leadershipboard.R.string.stringfor0)
                     }

@@ -1,6 +1,7 @@
 package com.example.leadershipboard.Activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.leadershipboard.R
@@ -17,6 +18,12 @@ class AboutActivity : AppCompatActivity() {
     private fun setOnClickListener() {
         cross.setOnClickListener {
             finish()
+        }
+
+        copyright.setOnClickListener {
+            val uri = Uri.parse("https://github.com/ThalapathySiva/LeadershipBoard/blob/add-license-1/LICENSE")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
         }
     }
 }

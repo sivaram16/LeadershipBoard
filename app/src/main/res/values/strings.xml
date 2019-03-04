@@ -5,6 +5,9 @@
         <b>CS</b>
         Entry
     </string>
+    <string name="copyright">
+        <u>Copyright @Team 404 found 2019.</u>
+    </string>
 
     <string name="stringforabove350">That’s a great score! Participate in more Leadership Board activities to earn
         more!

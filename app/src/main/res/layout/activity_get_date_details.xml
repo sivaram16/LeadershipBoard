@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="72dp"
-                    android:text="Select the regulation"
+                    android:text="Select the batch"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"

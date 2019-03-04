@@ -7,7 +7,7 @@
 - *Android client* (You're here)
 - [*Vue.js based web client*](https://github.com/roshanrahman/vue-leadership)
 ### Android application
-A mobile app based solution for faculty to enter college related data.
+A mobile app based solution for faculty to enter college related data and student can also view their achievement.
 
 ### Contributors
 - [Vineesh V](https://www.github.com/vineeshvk) (Backend/JavaScript developer)

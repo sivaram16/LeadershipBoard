@@ -39,7 +39,8 @@ class Student : AppCompatActivity() {
         aboutButton.setOnClickListener {
             startActivity(Intent(this@Student, AboutActivity::class.java))
         }
-        materialButton.setOnClickListener { editor?.clear()
+        materialButton.setOnClickListener {
+            editor?.clear()
             editor?.commit()
             val intent = Intent(this@Student, SignInActivity::class.java)
             startActivity(intent)

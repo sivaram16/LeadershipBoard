@@ -41,7 +41,7 @@ A mobile app based solution for faculty to enter college related data.
 
 
  
-### Copyright
+### Copyright :
 
  Copyright @2019 Sivaram
 

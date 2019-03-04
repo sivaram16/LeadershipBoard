@@ -26,7 +26,7 @@ A mobile app based solution for faculty to enter college related data.
 - **Easy download of data in PDF:** The Star of the Week can be instantly downloaded as a PDF file that can be opened and edited using any PDF software.
 
 ### Download
-- You can download a sample APK [here](https://drive.google.com/open?id=161uw2XTEcpq-U7fF33_ke8jkZjbL4UaP)
+- You can download a sample APK [here](https://github.com/ThalapathySiva/LeadershipBoard/blob/master/app/release/app-release.apk)
 
 ### Screenshots
 <img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/sign.png" alt="Sign in" width="300">

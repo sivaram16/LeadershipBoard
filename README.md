@@ -20,7 +20,8 @@ A mobile app based solution for faculty to enter college related data and studen
 - Uses Apollo Client for GraphQL queries
 
 ### Features
-- Straightforward Sign In for faculty
+- Straightforward Sign In for faculty and student
+- **View Achievement:**  Student can view thier total marks with achievements.
 - **Adding Mark Entries:** Staff can select their course and add marks for college related events for any number of students enrolled in that course.
 - **Easy download of data in CSV:** The data for all records or currently selected records can be instantly downloaded as a CSV file that can be opened and edited using any Spreadsheet software.
 - **Easy download of data in PDF:** The Star of the Week can be instantly downloaded as a PDF file that can be opened and edited using any PDF software.

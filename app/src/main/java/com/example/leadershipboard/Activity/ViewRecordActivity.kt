@@ -54,6 +54,10 @@ class ViewRecordActivity : AppCompatActivity() {
         viewStaroftheweek.setOnClickListener {
             startActivity(Intent(this@ViewRecordActivity, GetDateDetails::class.java))
         }
+
+        consolidate.setOnClickListener {
+            startActivity(Intent(this@ViewRecordActivity,Consolidate::class.java))
+        }
     }
     fun fetchingAllRecords(){
         Apollo_Helper.getApolloClient().query(ViewRecordsQuery.builder().csv(true).facultyId(uid).build())

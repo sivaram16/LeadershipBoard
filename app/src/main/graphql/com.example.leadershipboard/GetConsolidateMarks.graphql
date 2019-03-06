@@ -1,0 +1,3 @@
+query GetConsolidateMarks($startDate:String!,$endDate:String!,$year:Int!,$section:String!){
+  getConsolidateMarks(startDate:$startDate,endDate:$endDate,year:$year,section:$section)
+}

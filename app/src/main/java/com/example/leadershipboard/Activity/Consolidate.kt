@@ -3,7 +3,7 @@ package com.example.leadershipboard.Activity
 import android.app.AlertDialog
 import android.app.DownloadManager
 import android.content.Context
-import android.content.DialogInterface
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.util.Base64
@@ -11,34 +11,32 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.DatePicker
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
 import com.example.leadershipboard.CalculateStarOfWeekQuery
+import com.example.leadershipboard.GetConsolidateMarksQuery
+import com.example.leadershipboard.R
 import kotlinx.android.synthetic.main.activity_get_date_details.*
 import java.io.File
 import java.io.FileOutputStream
-import android.widget.DatePicker
 
-
-
-
-class GetDateDetails : AppCompatActivity(){
+class Consolidate : AppCompatActivity() {
     var regulationArrayStarOfTheWeek: MutableList<Int> = mutableListOf<Int>()
     lateinit var starRegulationSpinnerAdapter: ArrayAdapter<Int>
     var sectionArrayStarOfTheWeek: MutableList<Char> = mutableListOf()
     lateinit var starSectionSpinnerAdapter: ArrayAdapter<Char>
     var startDate: String = ""
-    var PDFString:String=""
+    var CSVString:String=""
     var endDate:String=""
-    var lastDate: String = ""
     var selectedRegulationStar: Int = 0
     var SelectedSectionStar: String = "A"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.example.leadershipboard.R.layout.activity_get_date_details)
+        setContentView(R.layout.activity_consolidate)
         setonclicklistener()
 
         regulation_spinner_star?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -78,59 +76,58 @@ class GetDateDetails : AppCompatActivity(){
     fun setonclicklistener() {
         download.setOnClickListener {
             startDate = date.text.toString()
-            getPDF()
+            getCSV()
         }
         date.setOnFocusChangeListener { v, hasFocus -> if(hasFocus) getStartDate()  }
         enddate.setOnFocusChangeListener { v, hasFocus -> if(hasFocus) getEndDate() }
     }
-    fun getPDF() {
+    fun getCSV() {
         Apollo_Helper.getApolloClient().query(
-            CalculateStarOfWeekQuery.builder().startDate(startDate)
+            GetConsolidateMarksQuery.builder().startDate(startDate)
                 .endDate(endDate).year(selectedRegulationStar).section(SelectedSectionStar)
                 .build()
-        ).enqueue(object : ApolloCall.Callback<CalculateStarOfWeekQuery.Data>() {
-            override fun onResponse(response: Response<CalculateStarOfWeekQuery.Data>) {
-                PDFString=response.data()?.calculateStarOfWeek()?.pdf().toString()
-                Log.e("PDF String ",""+PDFString)
+        ).enqueue(object : ApolloCall.Callback<GetConsolidateMarksQuery.Data>() {
+            override fun onResponse(response: Response<GetConsolidateMarksQuery.Data>) {
                 runOnUiThread{
-                if(response.data()?.calculateStarOfWeek()?.errors()?.get(0)?.message() != null) {
-                    Toast.makeText(this@GetDateDetails,""+ response.data()!!.calculateStarOfWeek()!!.errors()?.get(0)?.message(),Toast.LENGTH_SHORT).show()
+                    Log.e("Consolidate String",response.data()?.consolidateMarks.toString())
+                    CSVString=response.data()?.consolidateMarks.toString()
+                    Toast.makeText(this@Consolidate,"Downloaded", Toast.LENGTH_SHORT).show()
+                    convertToCSV(CSVString)
                 }
-                    else{
-                    getExactPDF()
-                    Toast.makeText(this@GetDateDetails,"Downloaded", Toast.LENGTH_SHORT).show()
-                }
-                    }
             }
             override fun onFailure(e: ApolloException) {
                 Log.e("error",e.toString())
             }
         })
     }
+    fun convertToCSV(responseString : String) {
+        try {
+            val file = File(Environment.getExternalStorageDirectory().toString() + File.separator +"Download"+ File.separator+ "Consolidate")
+            Log.e("dir",file.toString())
+            file.createNewFile()
+            if (file.exists()) {
+                val fo = FileOutputStream(file)
+                fo.write(responseString?.toByteArray())
+                fo.close()
+                println("file created: $file")
+            }
+            val downloadManager = this.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
-    fun getExactPDF() {
-        val file = File(Environment.getExternalStorageDirectory().toString() + File.separator +"Download"+ File.separator+ "PDF.pdf")
-        Log.e("dir",file.toString())
-        file.createNewFile()
-        if (file.exists()) {
-            val fo = FileOutputStream(file)
-            fo.write(Base64.decode(PDFString?.toByteArray(),0))
-            fo.close()
-            println("file created: $file")
+            downloadManager.addCompletedDownload(
+                file.getName(),
+                file.getName(),
+                true,
+                "text/csv",
+                file.getAbsolutePath(),
+                file.length(),
+                true
+            )
         }
-
-        val downloadManager = this.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-
-        downloadManager.addCompletedDownload(
-            file.getName(),
-            file.getName(),
-            true,
-            "application/pdf",
-            file.getAbsolutePath(),
-            file.length(),
-            true
-        )
+        catch (e:Exception){
+            Log.e("WriteFile",e.toString())
+        }
     }
+
 
     fun returnDateAsString(year: Int, month: Int, day: Int): String {
         var dateStr = ""

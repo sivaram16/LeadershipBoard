@@ -16,6 +16,8 @@
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".Activity.Consolidate">
+        </activity>
         <activity android:name=".Activity.Help">
         </activity>
         <activity android:name=".Activity.Student">

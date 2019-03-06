@@ -1,5 +1,5 @@
-query CalculateStarOfWeek($startDate:String!,$endDate:String!,$regulation:Int!,$section:String!){
-  calculateStarOfWeek(startDate:$startDate,endDate:$endDate,regulation:$regulation,section:$section){
+query CalculateStarOfWeek($startDate:String!,$endDate:String!,$year:Int!,$section:String!){
+  calculateStarOfWeek(startDate:$startDate,endDate:$endDate,year:$year,section:$section){
     pdf
     errors{
       errorCode

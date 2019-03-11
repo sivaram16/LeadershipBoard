@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.api.Response
@@ -100,6 +101,10 @@ class NewEntryActivity : AppCompatActivity() {
             Log.i("checking edittext", Integer.parseInt(total_students_editText.text.toString()).toString())
             if (Integer.parseInt(studentList?.count().toString())<Integer.parseInt(total_students_editText.text.toString())){
                 total_students_editText.error = "You cannot have more than "+studentList?.count().toString()+" students"
+            }
+            if(startDate.toString().trim().equals("") || startDate == null) {
+                Toast.makeText(this, "You forgot the date", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
             }
             else {
                 try {

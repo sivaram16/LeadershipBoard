@@ -1,5 +1,6 @@
 package com.example.leadershipboard.Activity
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
@@ -9,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.api.Response
@@ -17,6 +19,7 @@ import com.example.leadershipboard.R
 import com.example.leadershipboard.TestQuery
 import com.example.leadershipboard.ViewCoursesQuery
 import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.activity_get_date_details.*
 import kotlinx.android.synthetic.main.activity_new_entry.*
 import java.io.File
 import java.io.FileOutputStream
@@ -27,6 +30,7 @@ class NewEntryActivity : AppCompatActivity() {
     var constant = 1
     var selectedRegulation:Int = 0
     var selectedCourseName: String =""
+    var startDate: String = ""
     var selectedCourseId: String = ""
     var courseNameArray: MutableList<String> = mutableListOf()
     var regulationArray: MutableList<Int> = mutableListOf<Int>()
@@ -89,6 +93,8 @@ class NewEntryActivity : AppCompatActivity() {
         course_spinner!!.adapter = courseNameAdapter
         }
     private fun setOnClickListeners() {
+        entryDate.setOnFocusChangeListener { v, hasFocus -> if(hasFocus) getStartDate()  }
+
         continue_button.setOnClickListener{
             Log.i("checking studentList", Integer.parseInt(studentList?.count().toString()).toString())
             Log.i("checking edittext", Integer.parseInt(total_students_editText.text.toString()).toString())
@@ -103,6 +109,7 @@ class NewEntryActivity : AppCompatActivity() {
                     intent.putExtra("currentValue", constant)
                     intent.putExtra("courseName", selectedCourseName)
                     intent.putExtra("courseId", selectedCourseId)
+                    intent.putExtra("entryDate", startDate)
                     startActivity(intent)
                     finish()
                 } catch (e: NumberFormatException) {
@@ -139,6 +146,31 @@ class NewEntryActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+    fun getStartDate() {
+        val datePicker = DatePicker(this)
+        AlertDialog.Builder(this)
+            .setTitle("Select Start Date")
+            .setView(datePicker)
+            .setCancelable(true)
+            .setPositiveButton("Select") { dialog, _ -> startDate = returnDateAsString(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth); Log.i("START DATE: ", startDate);  entryDate.setText(startDate); dialog.cancel(); }
+            .create().show()
+    }
+
+    fun returnDateAsString(year: Int, month: Int, day: Int): String {
+        var dateStr = ""
+        dateStr += ("$year-")
+        if(month < 10) {
+            dateStr += ("0$month-")
+        } else {
+            dateStr += ("$month-")
+        }
+        if(day < 10) {
+            dateStr += ("0$day")
+        } else {
+            dateStr += ("$day")
+        }
+        return dateStr
     }
 }
 

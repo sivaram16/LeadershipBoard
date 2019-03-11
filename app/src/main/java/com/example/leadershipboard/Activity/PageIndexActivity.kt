@@ -42,19 +42,18 @@ class PageIndexActivity : AppCompatActivity() {
     lateinit var studentRegisterAdapter: ArrayAdapter<String>
     var disabledBackButton = false
     lateinit var alertDialog: AlertDialog
+    lateinit var entryDate: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_page_index)
         pageIndex_next.isEnabled = false
-        var formatter: SimpleDateFormat  = SimpleDateFormat("yyyy-MM-dd")
-        currentDate = formatter.format(Date())
-        Log.i("DATE STRING", currentDate)
         val pref = applicationContext.getSharedPreferences("MyPref", 0) // 0 - for private mode
         uid = pref.getString("UID", null) // getting String
         number = intent?.getIntExtra("current", 0)
         current = intent?.getIntExtra("currentValue", 0)
         courseId = intent?.getStringExtra("courseId")
+        entryDate = intent?.getStringExtra("entryDate")!!
         studentList = DataStore.studentList
         if(current == number){
             pageIndex_next.text = "Finish"
@@ -130,6 +129,7 @@ class PageIndexActivity : AppCompatActivity() {
                     intent.putExtra("current", number!!)
                     intent.putExtra("currentValue", current!! + 1)
                     intent.putExtra("courseId", courseId)
+                    intent.putExtra("entryDate", entryDate)
                     startActivity(intent)
                     mutateDataToServer()
                     finish()
@@ -183,7 +183,7 @@ class PageIndexActivity : AppCompatActivity() {
         studentPoints = Integer.parseInt(student_marks.text.toString())
         Apollo_Helper.getApolloClient().mutate(AddRecordMutation.builder().courseId(courseId.toString()).facultyId(uid.toString())
             .studentId(selectedStudentId.toString()).points(studentPoints!!.toInt())
-            .date(currentDate.toString()).build()).enqueue(object : ApolloCall.Callback<AddRecordMutation.Data>(){
+            .date(entryDate.toString()).build()).enqueue(object : ApolloCall.Callback<AddRecordMutation.Data>(){
             override fun onFailure(e: ApolloException) {
                 Log.e("jhjh",""+e.toString())
                 Toast.makeText(this@PageIndexActivity,""+e.toString(),Toast.LENGTH_SHORT).show()

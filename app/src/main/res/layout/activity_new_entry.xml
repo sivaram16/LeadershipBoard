@@ -104,29 +104,52 @@
                     />
 
             </LinearLayout>
-
             <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:text="Enter the no. of Students"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/course_linearLayout" />
+                    android:layout_width="wrap_content"
+                    android:text="Select Date"
+                    android:textSize="16sp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:layout_height="18dp"
+                    tools:ignore="MissingConstraints"
+                    android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="368dp" app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.083"/>
 
             <EditText
-                android:id="@+id/total_students_editText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:hint="Enter total students"
-                android:inputType="number"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView5" />
+                    android:id="@+id/entryDate"
+                    android:layout_width="150dp"
+                    android:hint="YYYY-MM-DD"
+                    android:layout_height="wrap_content"
+                    tools:ignore="MissingConstraints"
+                    android:layout_marginTop="400dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="112dp"
+                    android:text="Enter the no. of Students"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/course_linearLayout"/>
+
+            <EditText
+                    android:id="@+id/total_students_editText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:hint="Enter total students"
+                    android:inputType="number"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView5" android:layout_marginTop="12dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

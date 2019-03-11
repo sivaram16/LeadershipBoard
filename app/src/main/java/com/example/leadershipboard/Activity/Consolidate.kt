@@ -102,7 +102,7 @@ class Consolidate : AppCompatActivity() {
     }
     fun convertToCSV(responseString : String) {
         try {
-            val file = File(Environment.getExternalStorageDirectory().toString() + File.separator +"Download"+ File.separator+ "Consolidate")
+            val file = File(Environment.getExternalStorageDirectory().toString() + File.separator +"Download"+ File.separator+ startDate+" to "+endDate+"(CSE-"+SelectedSectionStar+")")
             Log.e("dir",file.toString())
             file.createNewFile()
             if (file.exists()) {
